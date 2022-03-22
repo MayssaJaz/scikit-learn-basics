@@ -27,5 +27,5 @@ Cross validation may be applied to ensure more accuracy to our prediction result
 - The different required dependencies are found in this file [requirements.txt](requirements/requirements.txt).Run this command to install them:
 
 ```
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 ```
