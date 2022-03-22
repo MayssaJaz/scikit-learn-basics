@@ -1,12 +1,10 @@
 from secrets import choice
 from sklearn import datasets
+from sklearn import naive_bayes
 from collections import Counter
-import matplotlib
 import pylab as pl
 from itertools import cycle
-from sklearn import naive_bayes
 import numpy as np
-import random
 
 
 
