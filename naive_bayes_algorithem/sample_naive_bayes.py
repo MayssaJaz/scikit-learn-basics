@@ -7,7 +7,7 @@ def split(dataset):
     target = dataset.target
     n = len(data)
     indexes = np.random.choice(range(len(data)), len(data))
-    # We split our dataset into two parts: 2/3 => training 1/3 =>training
+    # We split our dataset into two parts: 2/3 => training 1/3 =>test
     dataS1 = [data[index] for index in indexes[:int(2/3 * n)]]
     dataS2 = [data[index] for index in indexes[int(1/3 * n):-1]]
     targetS1 = [target[index] for index in indexes[:int(2/3 * n)]]
