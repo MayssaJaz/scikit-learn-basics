@@ -34,11 +34,9 @@ def plot_2D(data, target, target_names):
     pl.show()
 
 
-def predict(dataset):
-    # we choose the algorithem we are going to wrok with:Naive Bayes
-    nb = naive_bayes.MultinomialNB(fit_prior=True)
+def predict(nb, dataset):
     # training stage: we are training our model on the whole dataset except the last element
-    nb.fit(dataset.data[:-1], dataset.target[:-1])
+    nb.fit(dataset.data[:], dataset.target[:])
     # predicting the class of the 32th instance
     p31 = nb.predict([dataset.data[31]])
     print(p31)
@@ -48,7 +46,7 @@ def predict(dataset):
     # predicting the class of the whole dataset
     p = nb.predict(dataset.data[:])
     print(p)
-    return (p)
+    return (nb, p)
 
 
 def calculate_error(dataset, predictedDataset):
@@ -68,17 +66,17 @@ def calculate_error(dataset, predictedDataset):
             f"Percentage of error (2nd method)--> {np.count_nonzero(myArray)/len(p_y)}")
 
 
-def calculate_accuracy(dataset, predictedDataset):
-    nb = naive_bayes.MultinomialNB(fit_prior=True)
-    accuracy = nb.score(dataset.data, dataset.target)
+def calculate_accuracy(nb, dataset, predictedDataset):
+    accuracy = nb.score(predictedDataset, dataset.target)
     print(f"Percentage of accuracy (3rd method)--> {accuracy}")
 
 
 if __name__ == '__main__':
     # Importing the iris dataset
+    nb = naive_bayes.MultinomialNB(fit_prior=True)
     iris_dataset = datasets.load_iris()
     show_data_target(iris_dataset)
     plot_2D(iris_dataset.data, iris_dataset.target, iris_dataset.target_names)
-    predictedDataset = predict(iris_dataset)
-    calculate_error(iris_dataset, predictedDataset)
-    calculate_accuracy(iris_dataset, predictedDataset)
+    [nb, predictedDataset] = predict(nb, iris_dataset)
+    #calculate_error(iris_dataset, predictedDataset)
+    calculate_accuracy(nb, iris_dataset, predictedDataset)
